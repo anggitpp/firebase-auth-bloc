@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fb_auth_bloc/blocs/cubit/signin_cubit.dart';
 import 'package:fb_auth_bloc/pages/signup_page.dart';
 import 'package:fb_auth_bloc/pages/splash_page.dart';
 import 'package:fb_auth_bloc/repositories/auth_repository.dart';
@@ -37,6 +38,11 @@ class MyApp extends StatelessWidget {
         providers: [
           BlocProvider<AuthBloc>(
             create: (context) => AuthBloc(
+              authRepository: context.read<AuthRepository>(),
+            ),
+          ),
+          BlocProvider<SigninCubit>(
+            create: (context) => SigninCubit(
               authRepository: context.read<AuthRepository>(),
             ),
           )
