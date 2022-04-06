@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fb_auth_bloc/blocs/cubit/signin_cubit.dart';
+import 'package:fb_auth_bloc/blocs/signin/signin_cubit.dart';
 import 'package:fb_auth_bloc/pages/signup_page.dart';
 import 'package:fb_auth_bloc/pages/splash_page.dart';
 import 'package:fb_auth_bloc/repositories/auth_repository.dart';
@@ -7,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'blocs/auth/auth_bloc.dart';
+import 'blocs/signup/signup_cubit.dart';
 import 'firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -45,7 +46,12 @@ class MyApp extends StatelessWidget {
             create: (context) => SigninCubit(
               authRepository: context.read<AuthRepository>(),
             ),
-          )
+          ),
+          BlocProvider<SignupCubit>(
+            create: (context) => SignupCubit(
+              authRepository: context.read<AuthRepository>(),
+            ),
+          ),
         ],
         child: MaterialApp(
           title: 'Firebase Auth',
